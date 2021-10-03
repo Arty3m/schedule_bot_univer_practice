@@ -47,11 +47,12 @@ async def process_group_command(message: types.Message):
         if inserted_group in available_groups:
             if not BotDB.get_user_group(message.from_user.id):
                 BotDB.add_user_group(message.from_user.id, inserted_group)
-                print(f'ID: {message.from_user.id} Group:{BotDB.get_user_group(message.from_user.id)}')
+                print(f'ID: {message.from_user.id} Group:{BotDB.get_user_group(message.from_user.id)} (new)')
                 await bot.send_message(message.from_user.id, 'Группа успешно установлена!')
                 await message.answer('Выбери день недели:', reply_markup=kb.choosing_day)
             else:
                 BotDB.add_user_group(message.from_user.id, inserted_group)
+                print(f'ID: {message.from_user.id} Group:{BotDB.get_user_group(message.from_user.id)} (change)')
                 await bot.send_message(message.from_user.id, 'Группа успешно изменена!')
                 await message.answer('Выбери день недели:', reply_markup=kb.choosing_day)
         else:
