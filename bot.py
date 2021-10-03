@@ -13,6 +13,7 @@ BotDB = BotDB('allusers.db')
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
+count = 0
 
 
 @dp.message_handler(commands='help', commands_prefix='/!')
@@ -46,6 +47,7 @@ async def process_group_command(message: types.Message):
         if inserted_group in available_groups:
             if not BotDB.get_user_group(message.from_user.id):
                 BotDB.add_user_group(message.from_user.id, inserted_group)
+                print(f'ID: {message.from_user.id} Group:{BotDB.get_user_group(message.from_user.id)}')
                 await bot.send_message(message.from_user.id, 'Группа успешно установлена!')
                 await message.answer('Выбери день недели:', reply_markup=kb.choosing_day)
             else:
@@ -60,7 +62,6 @@ async def process_group_command(message: types.Message):
 async def schedule_for_day(message: types.Message):
     if BotDB.get_user_group(message.from_user.id):
         gr = BotDB.get_user_group(message.from_user.id)
-        print(gr)
         day = message.text.lower()
         if day in available_days:
             await message.answer(schedule[gr, day])
