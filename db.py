@@ -8,7 +8,7 @@ class BotDB:
         self.cursor = self.conn.cursor()
 
     def user_exists(self, tg_id):
-        """Проверяем, есть ли юзуер в БД """
+        """Проверяем, есть ли юзер в БД """
         result = self.cursor.execute('SELECT `id` FROM `users` WHERE `tg_id` = ?', (tg_id,))
         return bool(len(result.fetchall()))
 
