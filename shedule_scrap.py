@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 from selenium.webdriver.common.by import By
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import calendar
 from group_schedule import number_of_day, available_groups, available_days
 from db_schedule import ScheduleDB
@@ -24,11 +24,10 @@ def select_group(group):
 def get_data(day, from_date=datetime.now()):
     search_day = available_days.index(day)
     from_day = from_date.weekday()
-
     if from_date.isoweekday() == 7:
         different_days = 7 + search_day - from_day if from_day >= search_day else from_day + search_day
     else:
-        different_days = search_day - from_day if from_day >= search_day else from_day + search_day
+        different_days = search_day - from_day if from_day >= search_day else search_day - from_day
 
     data_of_day = from_date + timedelta(days=different_days)
 
