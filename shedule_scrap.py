@@ -1,6 +1,7 @@
 import selenium.webdriver
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta, date
@@ -151,8 +152,7 @@ def make_result(schedule):
 def make_schedule(group):
     try:
         global driver
-        driver = webdriver.Chrome(
-            executable_path=r"chromedriver\chromedriver.exe")
+        driver = webdriver.Chrome(ChromeDriverManager().install())
         driver.get(url)
 
         select_group(group)
