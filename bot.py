@@ -105,14 +105,13 @@ async def schedule_for_day(message: types.Message):
 @dp.message_handler(commands=['admin'], commands_prefix='/!')
 async def admin_command(message: types.Message):
     if str(message.from_user.id) in admins:
-        match message.text.split(' ', )[1]:
-            case 'fill':
-                await message.answer('Заполнение..')
-                txt = fill_db()
-                await message.answer(txt)
-            case 'reset':
-                txt = reset_db()
-                await message.answer(txt)
+        if message.text.split(' ', )[1] == 'fill':
+            await message.answer('Заполнение..')
+            txt = fill_db()
+            await message.answer(txt)
+        elif message.text.split(' ', )[1] == 'reset':
+            txt = reset_db()
+            await message.answer(txt)
     else:
         await asyncio.create_task(delete_message(message, 3))
 
