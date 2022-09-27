@@ -152,7 +152,8 @@ def make_result(schedule):
 def make_schedule(group):
     try:
         global driver
-        driver = webdriver.Chrome(ChromeDriverManager().install())
+        # driver = webdriver.Chrome(ChromeDriverManager().install())
+        driver = webdriver.Chrome(executable_path=r"chromedriver\chromedriver.exe")
         driver.get(url)
 
         select_group(group)
