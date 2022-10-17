@@ -152,7 +152,6 @@ def make_result(schedule):
 def make_schedule(group):
     try:
         global driver
-        # driver = webdriver.Chrome(ChromeDriverManager().install())
         driver = webdriver.Chrome(executable_path=r"chromedriver\chromedriver.exe")
         driver.get(url)
 
@@ -167,7 +166,7 @@ def make_schedule(group):
         driver.quit()
 
 
-# вызываемые из bot.py
+
 def get_schedule(group, day):
     if get_week_num(datetime.now().day, datetime.now().month, datetime.now().year):
         return ScheduleDB.get_schedule_odd(group, number_of_day[day])

@@ -6,7 +6,7 @@ from aiogram.utils.markdown import bold
 from aiogram.types import ParseMode
 from aiogram.utils.exceptions import MessageCantBeDeleted, MessageToDeleteNotFound
 from contextlib import suppress
-import datetime
+
 from config import TOKEN, admins
 from shedule_scrap import get_schedule, fill_db, reset_db, get_week_num, get_data
 from group_schedule import available_groups, available_days
